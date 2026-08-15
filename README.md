@@ -3,9 +3,7 @@
 A NieR: Automata rice for **Arch Linux and Arch derivatives only**
 (CachyOS, EndeavourOS, Artix-arch, Manjaro, etc.) — built around
 [niri](https://github.com/YaLTeR/niri) +
-[Noctalia](https://github.com/noctalia-dev/noctalia-shell) shell. Purple
-accents in kitty and fuzzel (`#a277ff`), blue focus ring in niri
-(`#7fc8ff`), blue-grey starship prompt.
+[Noctalia](https://github.com/noctalia-dev/noctalia-shell) shell.
 
 ## What's included
 
