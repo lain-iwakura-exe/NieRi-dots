@@ -71,6 +71,9 @@ layout {
     }
 }
 
+// awww-daemon must be running before anything (waypaper, Noctalia) tries
+// to set a wallpaper through the awww backend, or it fails silently.
+spawn-at-startup "awww-daemon"
 spawn-at-startup "noctalia"
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-at-startup "dbus-update-activation-environment --systemd --all"

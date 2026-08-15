@@ -144,11 +144,12 @@ PACMAN_PACKAGES=(
     gnome-themes-extra
     adwaita-icon-theme
     fastfetch
+    awww
 )
 
 AUR_PACKAGES=(
     noctalia
-    waypaper
+    waypaper-git
     nier-cursors-bin
 )
 
@@ -403,11 +404,13 @@ configure_waypaper() {
     # Minimal, known-good waypaper schema (per upstream docs). If a future
     # waypaper version renames these keys, just set the folder once via the
     # GUI (Mod+G) — it persists back into this same file.
+    # backend=awww requires the awww-daemon to already be running — that's
+    # spawned at niri startup (see config/niri/config.kdl).
     cat > "$wp_conf" <<EOF
 [Settings]
 language = en
 folder = $wp_dir
-backend = swaybg
+backend = awww
 monitors = All
 fill = Fill
 sort = name

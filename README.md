@@ -138,8 +138,11 @@ Run (or re-run) the installer:
 ```
 `deploy_wallpapers()` gets your images into `~/Pictures/nier-wallpapers`,
 and `configure_waypaper()` points waypaper's `folder` key at that same
-directory. Open the picker with `Mod+G` — your images are already loaded,
-just pick one.
+directory, using the `awww` backend. `awww-daemon` (the actual wallpaper
+renderer waypaper drives) is spawned at niri startup in
+`config/niri/config.kdl` — if wallpapers don't seem to apply, check it's
+actually running with `pgrep awww-daemon` before anything else. Open the
+picker with `Mod+G` — your images are already loaded, just pick one.
 
 It's safe to re-run `./install.sh` any time — already-installed packages
 and existing wallpaper files are left alone.
