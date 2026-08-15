@@ -1,9 +1,11 @@
 # NieRi-dots
 
-A dark purple NieR: Automata rice for **Arch Linux and Arch derivatives
-only** (CachyOS, EndeavourOS, Artix-arch, Manjaro, etc.) — built around
+A NieR: Automata rice for **Arch Linux and Arch derivatives only**
+(CachyOS, EndeavourOS, Artix-arch, Manjaro, etc.) — built around
 [niri](https://github.com/YaLTeR/niri) +
-[Noctalia](https://github.com/noctalia-dev/noctalia-shell) shell.
+[Noctalia](https://github.com/noctalia-dev/noctalia-shell) shell. Purple
+accents in kitty and fuzzel (`#a277ff`), blue focus ring in niri
+(`#7fc8ff`), blue-grey starship prompt.
 
 ## What's included
 
@@ -29,8 +31,7 @@ cd NieRi-dots
 ./install.sh
 ```
 
-Already have SSH set up with GitHub (as this repo's owner does)? Use this
-instead:
+Using SSH instead of HTTPS:
 
 ```bash
 git clone git@github.com:lain-iwakura-exe/NieRi-dots.git
@@ -196,9 +197,8 @@ rather keep a different filename or location.)
 ## You need to add
 
 - **Noctalia's own config** (bar layout, colors, palette source). Noctalia
-  stores this separately from niri — once you've got it tuned the way you
-  want, drop it in `config/noctalia/` and add a `deploy` line for it in
-  `install.sh`'s `deploy_configs()` and I'll wire it in.
+  stores this separately from niri — once it's tuned the way you want, drop
+  it in `config/noctalia/` and add it to `deploy_configs()` in `install.sh`.
 
 ## Key binds (niri)
 
