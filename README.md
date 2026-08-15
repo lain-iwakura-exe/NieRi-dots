@@ -1,7 +1,7 @@
 # NieRi-dots
 
 A NieR: Automata rice for **Arch Linux and Arch derivatives only**
-(CachyOS, EndeavourOS, Artix-arch, Manjaro, etc.) — built around
+(CachyOS, EndeavourOS, etc.) — built around
 [niri](https://github.com/YaLTeR/niri) +
 [Noctalia](https://github.com/noctalia-dev/noctalia-shell) shell.
 
