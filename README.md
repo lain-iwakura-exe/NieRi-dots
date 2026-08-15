@@ -55,7 +55,7 @@ Non-interactive (accepts every prompt):
 1. **Bootstraps `yay`** if it isn't already installed (builds `yay-bin` from
    the AUR).
 2. **Installs packages** — official repo packages via `pacman`, then AUR
-   packages (`noctalia`, `waypaper`, `nier-cursors-bin`) via `yay`.
+   packages (`noctalia`, `waypaper-git`, `nier-cursors-bin`) via `yay`.
 3. **Deploys configs** into `~/.config/{niri,fish,kitty,fuzzel,fastfetch}`
    and `~/.config/starship.toml`.
 4. **Copies wallpapers** from `wallpapers/` into `~/Pictures/nier-wallpapers`
@@ -78,75 +78,38 @@ Non-interactive (accepts every prompt):
 8. **Installs `fastfetch`** and deploys its config — see the Fastfetch
    section below for the one manual step (your own logo image).
 
-## Adding your own wallpapers
+## Wallpapers
 
-The repo doesn't ship any wallpaper images — they're copyrighted game art,
-so they can't be fetched or bundled automatically. There are two ways to
-get your set into the install:
+The 10 wallpapers in `wallpapers/` are already committed to this repo, so
+running `./install.sh` just works out of the box — `deploy_wallpapers()`
+copies them into `~/Pictures/nier-wallpapers` and `configure_waypaper()`
+points waypaper's `folder` key at that same directory, using the `awww`
+backend. That directory name is hardcoded in `install.sh`, not something
+each person picks — if you fork this and want a different path, change it
+in `deploy_wallpapers()` and `configure_waypaper()`.
 
-### Option A — bundle them as a GitHub Release (recommended)
-
-Keeps the repo's git history free of binary image files.
-
-1. Tar up your wallpapers:
-   ```bash
-   cd ~/Pictures/"nier wallpapers"
-   tar -czvf wallpapers.tar.gz *.jpg
-   ```
-2. On GitHub: **your repo → Releases → "Create a new release"**
-   - Tag: `wallpapers-v1`
-   - Title: whatever you like, e.g. `Wallpapers v1`
-   - Drag `wallpapers.tar.gz` into the attachments box at the bottom
-   - Click **Publish release**
-3. Copy the direct download link for that asset (right-click it on the
-   release page → Copy Link, or just click it once to see the URL in your
-   address bar). It looks like:
-   ```
-   https://github.com/lain-iwakura-exe/NieRi-dots/releases/download/wallpapers-v1/wallpapers.tar.gz
-   ```
-4. Paste that URL into `WALLPAPER_ARCHIVE_URL` near the top of `install.sh`,
-   commit, and push.
-
-From then on, anyone (including you, on a fresh install) running
-`./install.sh` with an empty `wallpapers/` folder gets prompted to download
-and extract that archive straight into `~/Pictures/nier-wallpapers`
-automatically — no manual step needed after the first setup.
-
-Adding more wallpapers later: tar up the updated set, upload it as a new
-release asset (or edit the existing release and swap the file), bump the
-tag if you like, and update `WALLPAPER_ARCHIVE_URL` if the filename/tag
-changed.
-
-### Option B — commit them straight into the repo
-
-Simpler, but every image adds to the repo's clone size forever.
-
-1. Drop your image files into `wallpapers/` in this repo:
-   ```bash
-   cp ~/Pictures/nier-wallpapers/*.jpg NieRi-dots/wallpapers/
-   ```
-2. Commit and push as normal.
-
-If `wallpapers/` has files in it, the installer uses those directly and
-skips the Release download entirely — Option B always takes priority over
-Option A.
-
-### Either way
-
-Run (or re-run) the installer:
-```bash
-./install.sh
-```
-`deploy_wallpapers()` gets your images into `~/Pictures/nier-wallpapers`,
-and `configure_waypaper()` points waypaper's `folder` key at that same
-directory, using the `awww` backend. `awww-daemon` (the actual wallpaper
-renderer waypaper drives) is spawned at niri startup in
-`config/niri/config.kdl` — if wallpapers don't seem to apply, check it's
-actually running with `pgrep awww-daemon` before anything else. Open the
-picker with `Mod+G` — your images are already loaded, just pick one.
+`awww-daemon` (the actual wallpaper renderer waypaper drives) is spawned at
+niri startup in `config/niri/config.kdl`. If wallpapers don't seem to
+apply, check it's actually running first: `pgrep awww-daemon`. Once it's
+up, open the picker with `Mod+G` — the images are already loaded, just
+pick one.
 
 It's safe to re-run `./install.sh` any time — already-installed packages
 and existing wallpaper files are left alone.
+
+If you add more images later, drop them straight into `wallpapers/` and
+push — same as the first ten.
+
+### If the repo ever gets too heavy to clone
+
+Images bundled straight into git add to the clone size forever, which is
+fine at 10 wallpapers but won't scale forever. If that becomes annoying,
+the alternative is tarring them up and attaching that as a GitHub Release
+asset instead, then pointing `WALLPAPER_ARCHIVE_URL` at the top of
+`install.sh` at the download link. `deploy_wallpapers()` already checks for
+that URL and downloads it whenever `wallpapers/` is empty — so switching
+over just means moving the files out of the repo and into a Release,
+nothing in the script needs to change.
 
 ### Picking a wallpaper directly in Noctalia
 
